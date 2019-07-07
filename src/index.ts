@@ -1,0 +1,59 @@
+#!/usr/bin/env node
+/*!
+ * This Source Code Form is subject to the terms of the Mozilla Public
+ * License, v. 2.0. If a copy of the MPL was not distributed with this
+ * file, You can obtain one at http://mozilla.org/MPL/2.0/.
+ */
+'use strict';
+
+// https://discordapp.com/oauth2/authorize?client_id=597054910806228993&scope=bot&permissions=18432
+
+import { join } from 'path';
+
+import { Client } from 'discord.js';
+import { Sequelize } from 'sequelize-typescript';
+import { Sequelize as SequelizeBase } from 'sequelize';
+
+import { CommandManager } from './lib/commands/CommandManager';
+import { SubscribeCommand } from './lib/commands/SubscribeCommand';
+import { UnsubscribeCommand } from './lib/commands/UnsubscribeCommand';
+import { InfoCommand } from './lib/commands/InfoCommand';
+
+import { botconfig } from './lib/config';
+import { COMMAND_PREFIX } from './lib/constants';
+import { PostCommand } from './lib/commands/PostCommand';
+
+async function initBot() {
+
+    const database = new Sequelize({
+        logging: false,
+        modelPaths: [join(__dirname, "lib", "models")],
+        ...botconfig.get("db")
+    }) as any as SequelizeBase;
+
+    await database.sync();
+
+    const client = new Client();
+
+    const commandManager = new CommandManager(client, COMMAND_PREFIX, true, true);
+
+    commandManager.registerCommand(InfoCommand);
+    commandManager.registerCommand(SubscribeCommand);
+    commandManager.registerCommand(UnsubscribeCommand);
+    commandManager.registerCommand(PostCommand);
+
+    client.on('ready', () => {
+        console.log("Ready!");
+    });
+
+    client.on('message', async message => commandManager.handleMessage(message));
+
+    await client.login(botconfig.get("bottoken"));
+    console.log("Logged In!");
+
+}
+
+initBot().then(
+    () => console.log("Bot Started!"),
+    error => console.error(error)
+);

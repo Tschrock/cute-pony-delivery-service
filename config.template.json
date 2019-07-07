@@ -1,0 +1,13 @@
+{
+    "apikey": "",
+    "clientid": "",
+    "bottoken": "",
+    "db": {
+        "dialect": "",
+        "host": "",
+        "port": 5432,
+        "database": "",
+        "username": "",
+        "password": ""
+    }
+}
