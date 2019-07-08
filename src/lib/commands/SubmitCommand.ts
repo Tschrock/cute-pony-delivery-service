@@ -32,6 +32,7 @@ export class SubmitCommand extends Command {
 
             const botApplication = await this.manager.getApplication();
             await botApplication.owner.send(`New submission from \`${message.author.tag}\`:",`, new QuoteEmbed(message));
+            await message.reply(`Submission sent.`);
 
         }
         catch (error) {

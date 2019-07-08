@@ -32,6 +32,7 @@ export class FeedbackCommand extends Command {
 
             const botApplication = await this.manager.getApplication();
             await botApplication.owner.send(`New feedback from \`${message.author.tag}\`:",`, new QuoteEmbed(message));
+            await message.reply(`Feedback sent.`);
 
         }
         catch (error) {
