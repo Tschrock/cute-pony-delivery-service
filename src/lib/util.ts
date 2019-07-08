@@ -77,20 +77,20 @@ export async function sleep(ms: number) {
 
 export function searchMessage(message: Message, searchString: string) {
     searchString = searchString.toLowerCase();
-    return message.content.toLowerCase().includes(searchString)
-        || message.embeds.some(e => searchEmbed(e, searchString));
+    return (message.content && message.content.toLowerCase().includes(searchString))
+        || (message.embeds && message.embeds.some(e => searchEmbed(e, searchString)));
 }
 
 export function searchEmbed(embed: MessageEmbed, searchString: string) {
     searchString = searchString.toLowerCase();
-    return embed.description.toLowerCase().includes(searchString)
-        || embed.fields.some(f => searchEmbedField(f, searchString))
-        || embed.footer.text.toLowerCase().includes(searchString)
-        || embed.title.toLowerCase().includes(searchString);
+    return (embed.description && embed.description.toLowerCase().includes(searchString))
+        || (embed.fields && embed.fields.some(f => searchEmbedField(f, searchString)))
+        || (embed.footer && embed.footer.text && embed.footer.text.toLowerCase().includes(searchString))
+        || (embed.title && embed.title.toLowerCase().includes(searchString));
 }
 
 export function searchEmbedField(field: MessageEmbedField, searchString: string) {
     searchString = searchString.toLowerCase();
-    return field.name.toLowerCase().includes(searchString)
-        || field.value.toLowerCase().includes(searchString);
+    return (field.name && field.name.toLowerCase().includes(searchString))
+        || (field.value && field.value.toLowerCase().includes(searchString));
 }
