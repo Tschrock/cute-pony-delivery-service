@@ -15,7 +15,7 @@ import { SERVICE_NAME } from '../constants';
 export class UnsubscribeCommand extends Command {
 
     public readonly name = "Unsubscribe";
-    public readonly description = `Unsubscribes the current channel (or DM) from the ${SERVICE_NAME}`;
+    public readonly description = `Unsubscribes the current channel from the ${SERVICE_NAME}`;
 
     public readonly command = "unsubscribe";
     public readonly aliases = [];

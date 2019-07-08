@@ -17,7 +17,7 @@ import { SERVICE_NAME } from '../constants';
 export class SubscribeCommand extends Command {
 
     public readonly name = "Subscribe";
-    public readonly description = `Subscribes the current channel (or DM) to the ${SERVICE_NAME}`;
+    public readonly description = `Subscribes the current channel to the ${SERVICE_NAME}`;
 
     public readonly command = "subscribe";
     public readonly aliases = [];
