@@ -15,7 +15,7 @@ export class InfoEmbed extends RichEmbed {
     constructor(clientId: string, commandHelpList: string[]) {
         super({
             title: `Welcome to the ${SERVICE_NAME}!`,
-            description: `I share cute ponies to keep you smiling the entire day.${DIVIDER}`,
+            description: `I share cute ponies to keep you smiling thoughout the day.${DIVIDER}`,
             color: 13913602,
             footer: {
                 icon_url: "https://cdn.discordapp.com/attachments/393754919020134400/597310556751265802/Profile5_transparent.png",
