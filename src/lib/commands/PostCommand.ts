@@ -45,6 +45,11 @@ export class PostCommand extends Command {
                     return;
                 }
 
+                if(!image.tagNames.includes("safe")) {
+                    await message.reply(`That image isn't tagged as \`safe\`. Only \`safe\` images may be posted.` );
+                    return;
+                }
+
                 const imageEmbed = new ImageEmbed(image);
 
                 const subscriptions = await ChannelSubscription.findAll();
