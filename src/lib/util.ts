@@ -6,13 +6,14 @@
 'use strict';
 
 import { UnitFormatter } from "./UnitFormatter";
+import { Message, MessageEmbed, MessageEmbedField } from "discord.js";
 
 export function trimTags(tags: string[], limit: number) {
-    if(tags.length > limit) {
+    if (tags.length > limit) {
 
         tags = tags.slice(0, limit - 1);
 
-        if(limit > 2) {
+        if (limit > 2) {
             tags = tags.slice(0, tags.length - 1);
             tags.push("...");
         }
@@ -22,8 +23,8 @@ export function trimTags(tags: string[], limit: number) {
 
 export function formatArray(items: string[]) {
 
-    if(items.length === 0) return "";
-    else if(items.length === 1) return items[0];
+    if (items.length === 0) return "";
+    else if (items.length === 1) return items[0];
     else {
         const beginning = items.slice(0, items.length - 1).join(",");
         const end = items[items.length - 1];
@@ -33,13 +34,13 @@ export function formatArray(items: string[]) {
 }
 
 export enum TimeSpan {
-    SECOND  = 1000,
-    MINUTE  = 1000 * 60,
-    HOUR    = 1000 * 60 * 60,
-    DAY     = 1000 * 60 * 60 * 24,
-    WEEK    = 1000 * 60 * 60 * 24 * 7,
-    MONTH   = 1000 * 60 * 60 * 24 * 30,
-    YEAR    = 1000 * 60 * 60 * 24 * 365
+    SECOND = 1000,
+    MINUTE = 1000 * 60,
+    HOUR = 1000 * 60 * 60,
+    DAY = 1000 * 60 * 60 * 24,
+    WEEK = 1000 * 60 * 60 * 24 * 7,
+    MONTH = 1000 * 60 * 60 * 24 * 30,
+    YEAR = 1000 * 60 * 60 * 24 * 365
 }
 
 export const DateFormatter = new UnitFormatter(new Map([
@@ -72,4 +73,24 @@ export function escapeMessage(content: string) {
 
 export async function sleep(ms: number) {
     return new Promise((resolve) => setTimeout(resolve, ms));
+}
+
+export function searchMessage(message: Message, searchString: string) {
+    searchString = searchString.toLowerCase();
+    return message.content.toLowerCase().includes(searchString)
+        || message.embeds.some(e => searchEmbed(e, searchString));
+}
+
+export function searchEmbed(embed: MessageEmbed, searchString: string) {
+    searchString = searchString.toLowerCase();
+    return embed.description.toLowerCase().includes(searchString)
+        || embed.fields.some(f => searchEmbedField(f, searchString))
+        || embed.footer.text.toLowerCase().includes(searchString)
+        || embed.title.toLowerCase().includes(searchString);
+}
+
+export function searchEmbedField(field: MessageEmbedField, searchString: string) {
+    searchString = searchString.toLowerCase();
+    return field.name.toLowerCase().includes(searchString)
+        || field.value.toLowerCase().includes(searchString);
 }
