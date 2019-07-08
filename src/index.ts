@@ -15,13 +15,15 @@ import { Sequelize } from 'sequelize-typescript';
 import { Sequelize as SequelizeBase } from 'sequelize';
 
 import { CommandManager } from './lib/commands/CommandManager';
+import { InfoCommand } from './lib/commands/InfoCommand';
 import { SubscribeCommand } from './lib/commands/SubscribeCommand';
 import { UnsubscribeCommand } from './lib/commands/UnsubscribeCommand';
-import { InfoCommand } from './lib/commands/InfoCommand';
+import { PostCommand } from './lib/commands/PostCommand';
+import { RecallCommand } from './lib/commands/RecallCommand';
+import { BroadcastCommand } from './lib/commands/BroadcastCommand';
 
 import { botconfig } from './lib/config';
 import { COMMAND_PREFIX } from './lib/constants';
-import { PostCommand } from './lib/commands/PostCommand';
 
 async function initBot() {
 
@@ -41,6 +43,8 @@ async function initBot() {
     commandManager.registerCommand(SubscribeCommand);
     commandManager.registerCommand(UnsubscribeCommand);
     commandManager.registerCommand(PostCommand);
+    commandManager.registerCommand(RecallCommand);
+    commandManager.registerCommand(BroadcastCommand);
 
     client.on('ready', () => {
         console.log("Ready!");
