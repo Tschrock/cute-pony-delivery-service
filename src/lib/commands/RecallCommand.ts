@@ -27,12 +27,12 @@ export class RecallCommand extends Command {
 
         if (message.author.id === "163300806769115136") {
 
-            if (args.length !== 1) {
+            if (args.length < 1) {
                 await message.reply(`Usage: \`${this.getUsage(this.manager.commandPrefix, command)}\``);
                 return;
             }
 
-            const searchString = args[0];
+            const searchString = args.join(" ");
 
             try {
 
