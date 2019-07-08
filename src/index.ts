@@ -20,6 +20,7 @@ import { FeedbackCommand } from './lib/commands/FeedbackCommand';
 import { InfoCommand } from './lib/commands/InfoCommand';
 import { PostCommand } from './lib/commands/PostCommand';
 import { RecallCommand } from './lib/commands/RecallCommand';
+import { ReplyCommand } from './lib/commands/ReplyCommand';
 import { SubmitCommand } from './lib/commands/SubmitCommand';
 import { SubscribeCommand } from './lib/commands/SubscribeCommand';
 import { UnsubscribeCommand } from './lib/commands/UnsubscribeCommand';
@@ -53,6 +54,7 @@ async function initBot() {
     commandManager.registerCommand(PostCommand);
     commandManager.registerCommand(BroadcastCommand);
     commandManager.registerCommand(RecallCommand);
+    commandManager.registerCommand(ReplyCommand);
 
     client.on('ready', () => {
         console.log("Ready!");
