@@ -27,7 +27,8 @@ export class PostCommand extends Command {
 
     public async run(command: string, args: string[], message: Message): Promise<void> {
 
-        if (message.author.id === "163300806769115136") {
+        const botApplication = await this.manager.getApplication();
+        if (message.author.id === botApplication.owner.id) {
 
             if(args.length !== 1 || !/^\d+$/.test(args[0])) {
                 await message.reply(`Usage: \`${this.getUsage(this.manager.commandPrefix, command)}\``);
