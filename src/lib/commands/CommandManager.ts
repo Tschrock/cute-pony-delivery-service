@@ -5,7 +5,7 @@
  */
 'use strict';
 
-import { Client, Message } from "discord.js";
+import { Client, Message, OAuth2Application } from "discord.js";
 import { Command } from "./Command";
 import { escapeMessage } from "../util";
 import { HelpCommand } from "./HelpCommand";
@@ -22,6 +22,11 @@ export class CommandManager {
 
     private readonly registeredCommands: Command[] = [];
     private readonly registeredCommandMap = new Map<string, Command>();
+
+    private _Application: OAuth2Application | null = null;
+    public async getApplication() {
+        return this._Application || (this._Application = await this.client.fetchApplication());
+    }
 
     /**
      * Creates a new CommandManager for managing chat commands.

@@ -15,12 +15,14 @@ import { Sequelize } from 'sequelize-typescript';
 import { Sequelize as SequelizeBase } from 'sequelize';
 
 import { CommandManager } from './lib/commands/CommandManager';
+import { BroadcastCommand } from './lib/commands/BroadcastCommand';
+import { FeedbackCommand } from './lib/commands/FeedbackCommand';
 import { InfoCommand } from './lib/commands/InfoCommand';
-import { SubscribeCommand } from './lib/commands/SubscribeCommand';
-import { UnsubscribeCommand } from './lib/commands/UnsubscribeCommand';
 import { PostCommand } from './lib/commands/PostCommand';
 import { RecallCommand } from './lib/commands/RecallCommand';
-import { BroadcastCommand } from './lib/commands/BroadcastCommand';
+import { SubmitCommand } from './lib/commands/SubmitCommand';
+import { SubscribeCommand } from './lib/commands/SubscribeCommand';
+import { UnsubscribeCommand } from './lib/commands/UnsubscribeCommand';
 
 import { botconfig } from './lib/config';
 import { COMMAND_PREFIX } from './lib/constants';
@@ -39,12 +41,18 @@ async function initBot() {
 
     const commandManager = new CommandManager(client, COMMAND_PREFIX, true, true);
 
+    // Register user commands
     commandManager.registerCommand(InfoCommand);
     commandManager.registerCommand(SubscribeCommand);
     commandManager.registerCommand(UnsubscribeCommand);
+    commandManager.registerCommand(UnsubscribeCommand);
+    commandManager.registerCommand(SubmitCommand);
+    commandManager.registerCommand(FeedbackCommand);
+
+    // Register admin commands
     commandManager.registerCommand(PostCommand);
-    commandManager.registerCommand(RecallCommand);
     commandManager.registerCommand(BroadcastCommand);
+    commandManager.registerCommand(RecallCommand);
 
     client.on('ready', () => {
         console.log("Ready!");
