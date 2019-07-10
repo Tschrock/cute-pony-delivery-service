@@ -46,7 +46,6 @@ async function initBot() {
     commandManager.registerCommand(InfoCommand);
     commandManager.registerCommand(SubscribeCommand);
     commandManager.registerCommand(UnsubscribeCommand);
-    commandManager.registerCommand(UnsubscribeCommand);
     commandManager.registerCommand(SubmitCommand);
     commandManager.registerCommand(FeedbackCommand);
 
