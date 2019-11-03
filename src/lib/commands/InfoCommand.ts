@@ -9,7 +9,7 @@ import { Message } from "discord.js";
 
 import { Command } from "./Command";
 import { InfoEmbed } from "../embeds/InfoEmbed";
-import { botconfig } from "../config";
+import { CommandPermission } from "../CommandPermission";
 
 export class InfoCommand extends Command {
 
@@ -19,13 +19,27 @@ export class InfoCommand extends Command {
     public readonly command = "info";
     public readonly aliases = ["?", "invite"];
 
+    public readonly permission = CommandPermission.USER;
+
     public async run(command: string, args: string[], message: Message): Promise<void> {
 
-        // Generate the command list
-        const commandList = this.manager.getRegisteredCommands().filter(c => c.showInHelp).map(c => this.generateCommandHelp(c));
+        // Get the bot application
+        const botApplication = await this.manager.getApplication();
 
-        // Send the help
-        await message.channel.send(new InfoEmbed(botconfig.get("clientid"), commandList));
+        // Get the user's permission level
+        const userPermissionlevel = message.author.id === botApplication.owner.id ? CommandPermission.OWNER : CommandPermission.USER;
+
+        // Generate the command list
+        const commandList = this.manager.getRegisteredCommands().filter(c => c.permission <= userPermissionlevel).map(c => this.generateCommandHelp(c));
+
+        // Generate the invite link
+        const inviteLink = botApplication.id === "640272840180105236" ? "https://l.cp3.es/cuteponybot" : await message.client.generateInvite(["SEND_MESSAGES", "READ_MESSAGES", "READ_MESSAGE_HISTORY", "EMBED_LINKS"]);
+
+        // Get some stats
+        const guildCount = message.client.guilds.size;
+
+        // Send the info message
+        await message.channel.send(new InfoEmbed(guildCount, inviteLink, commandList));
 
     }
 

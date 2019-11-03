@@ -1,6 +1,6 @@
 {
   "name": "cpds",
-  "version": "1.0.0",
+  "version": "1.2.0",
   "description": "The CP3 Cute Pony Delivery Service.",
   "main": "dist/index.js",
   "scripts": {
@@ -16,25 +16,28 @@
   },
   "license": "MPL-2.0",
   "devDependencies": {
-    "@types/bluebird": "^3.5.27",
+    "@types/bluebird": "^3.5.28",
     "@types/convict": "^4.2.1",
-    "@types/node": "^12.0.12",
-    "@types/validator": "^10.11.1",
-    "ts-node": "^8.3.0",
-    "tslint": "^5.18.0",
-    "typescript": "^3.5.2",
-    "typescript-tslint-plugin": "^0.5.3"
+    "@types/node": "^12.12.5",
+    "@types/validator": "^10.11.3",
+    "ts-node": "^8.4.1",
+    "tslint": "^5.20.0",
+    "typescript": "^3.6.4",
+    "typescript-tslint-plugin": "^0.5.4"
   },
   "dependencies": {
     "@discordjs/uws": "^11.149.1",
-    "convict": "^5.0.0",
+    "@types/request-promise-native": "^1.0.17",
+    "convict": "^5.2.0",
     "discord.js": "^11.5.1",
     "erlpack": "github:discordapp/erlpack",
-    "node-derpi": "^0.3.2",
-    "pg": "^7.11.0",
+    "node-derpi": "^0.3.7",
+    "pg": "^7.12.1",
     "pg-hstore": "^2.3.3",
     "reflect-metadata": "^0.1.13",
-    "sequelize": "^5.9.4",
-    "sequelize-typescript": "^1.0.0-beta.3"
+    "request": "^2.88.0",
+    "request-promise-native": "^1.0.7",
+    "sequelize": "^5.21.2",
+    "sequelize-typescript": "^1.0.0"
   }
 }

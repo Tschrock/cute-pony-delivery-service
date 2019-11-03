@@ -8,6 +8,7 @@
 import { Message } from 'discord.js';
 
 import { CommandManager } from './CommandManager';
+import { CommandPermission } from '../CommandPermission';
 
 export abstract class Command {
 
@@ -15,7 +16,7 @@ export abstract class Command {
     public abstract readonly description: string;
     public abstract readonly command: string;
     public abstract readonly aliases: string[];
-    public readonly showInHelp: boolean = true;
+    public abstract readonly permission: CommandPermission;
 
     constructor(
         protected readonly manager: CommandManager

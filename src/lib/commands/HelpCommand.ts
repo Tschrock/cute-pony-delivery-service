@@ -9,6 +9,7 @@ import { Message } from "discord.js";
 
 import { Command } from "./Command";
 import { SERVICE_NAME } from '../constants';
+import { CommandPermission } from "../CommandPermission";
 
 export class HelpCommand extends Command {
 
@@ -18,10 +19,18 @@ export class HelpCommand extends Command {
     public readonly command = "help";
     public readonly aliases = ["halp"];
 
+    public readonly permission = CommandPermission.USER;
+
     public async run(command: string, args: string[], message: Message): Promise<void> {
 
-        // Get all registered commands
-        const commands = this.manager.getRegisteredCommands().filter(c => c.showInHelp);
+        // Get the bot application
+        const botApplication = await this.manager.getApplication();
+
+        // Get the user's permission level
+        const userPermissionlevel = message.author.id === botApplication.owner.id ? CommandPermission.OWNER : CommandPermission.USER;
+
+        // Generate the command list
+        const commands = this.manager.getRegisteredCommands().filter(c => c.permission <= userPermissionlevel);
 
         // Generate help for each command
         const commandHelpList = commands.map(c => this.generateCommandHelp(c)).join("\n\n");

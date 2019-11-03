@@ -8,6 +8,7 @@
 import { Message, TextChannel, DMChannel, GroupDMChannel } from "discord.js";
 
 import { Command } from "./Command";
+import { CommandPermission } from "../CommandPermission";
 
 const MESSAGE_URL_PREFIX = "https://discordapp.com/channels/";
 
@@ -19,7 +20,7 @@ export class ReplyCommand extends Command {
     public readonly command = "reply";
     public readonly aliases = [];
 
-    public readonly showInHelp = false;
+    public readonly permission = CommandPermission.POSTER;
 
     public async run(command: string, args: string[], message: Message): Promise<void> {
 
@@ -45,7 +46,7 @@ export class ReplyCommand extends Command {
                     return;
                 }
 
-                const replyMessageUrl = (urls[0] as string).substring(MESSAGE_URL_PREFIX.length);
+                const replyMessageUrl = urls[0].substring(MESSAGE_URL_PREFIX.length);
                 const [serverId, channelId, messageId] = replyMessageUrl.split("/");
 
                 if (!serverId || !channelId || !messageId) {

@@ -10,6 +10,7 @@ import { Message } from "discord.js";
 import { Command } from "./Command";
 import { SERVICE_NAME } from '../constants';
 import { QuoteEmbed } from "../embeds/QuoteEmbed";
+import { CommandPermission } from "../CommandPermission";
 
 export class SubmitCommand extends Command {
 
@@ -18,6 +19,8 @@ export class SubmitCommand extends Command {
 
     public readonly command = "submit";
     public readonly aliases = [];
+
+    public readonly permission = CommandPermission.USER;
 
     public async run(command: string, args: string[], message: Message): Promise<void> {
 

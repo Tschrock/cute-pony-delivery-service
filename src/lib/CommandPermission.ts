@@ -5,4 +5,8 @@
  */
 'use strict';
 
-export const SERVICE_NAME = "Cute Pony Delivery Service";
+export enum CommandPermission {
+    USER = 100,
+    POSTER = 200,
+    OWNER = 300
+}

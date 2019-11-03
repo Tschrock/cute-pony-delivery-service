@@ -9,6 +9,7 @@ import { Message, TextChannel } from "discord.js";
 
 import { Command } from "./Command";
 import { ChannelSubscription } from "../models/ChannelSubscription";
+import { CommandPermission } from "../CommandPermission";
 import { ErrorEmbed } from '../embeds/ErrorEmbed';
 import { SERVICE_NAME } from '../constants';
 import { sleep } from '../util';
@@ -21,7 +22,7 @@ export class BroadcastCommand extends Command {
     public readonly command = "broadcast";
     public readonly aliases = [];
 
-    public readonly showInHelp = false;
+    public readonly permission = CommandPermission.POSTER;
 
     public async run(command: string, args: string[], message: Message): Promise<void> {
 

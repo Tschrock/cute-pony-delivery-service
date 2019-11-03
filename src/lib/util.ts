@@ -25,8 +25,9 @@ export function formatArray(items: string[]) {
 
     if (items.length === 0) return "";
     else if (items.length === 1) return items[0];
+    else if (items.length === 2) return items[0] + " and " + items[1];
     else {
-        const beginning = items.slice(0, items.length - 1).join(",");
+        const beginning = items.slice(0, items.length - 1).join(", ");
         const end = items[items.length - 1];
         return beginning + ", and " + end;
     }
@@ -57,6 +58,11 @@ export function formatDate(date: Date) {
     const diff = Date.now() - date.valueOf();
     const formats = DateFormatter.getFormats(diff, 1);
     return formatArray(formats.map(f => f.toString())) + " ago";
+}
+
+export function formatDuration(milliseconds: number) {
+    const formats = DateFormatter.getFormats(milliseconds, 3);
+    return formatArray(formats.map(f => f.toString()));
 }
 
 // https://stackoverflow.com/a/3561711

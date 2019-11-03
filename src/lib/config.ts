@@ -14,6 +14,13 @@ const config = convict({
         default: "development",
         env: "NODE_ENV"
     },
+    prefix: {
+        doc: "The bot's command prefix.",
+        format: "*",
+        default: ">>",
+        env: "PREFIX",
+        arg: "prefix"
+    },
     apikey: {
         doc: "Your Derpibooru API key.",
         format: "*",
@@ -43,6 +50,20 @@ const config = convict({
         default: 600,
         env: "COOLDOWN",
         arg: "cooldown"
+    },
+    queueGalleryId: {
+        doc: "The gallery to look at for new images.",
+        format: Number,
+        default: 0,
+        env: "QUEUE_GALLERY_ID",
+        arg: "queueGalleryId"
+    },
+    historyGalleryId: {
+        doc: "The gallery to use to track past posts.",
+        format: Number,
+        default: 0,
+        env: "HISTORY_GALLERY_ID",
+        arg: "historyGalleryId"
     },
     db: {
         dialect: {

@@ -14,6 +14,7 @@ import { ErrorEmbed } from '../embeds/ErrorEmbed';
 import { SERVICE_NAME } from '../constants';
 import { ImageEmbed } from '../embeds/ImageEmbed';
 import { sleep } from '../util';
+import { CommandPermission } from "../CommandPermission";
 
 export class PostCommand extends Command {
 
@@ -23,7 +24,7 @@ export class PostCommand extends Command {
     public readonly command = "post";
     public readonly aliases = [];
 
-    public readonly showInHelp = false;
+    public readonly permission = CommandPermission.POSTER;
 
     public async run(command: string, args: string[], message: Message): Promise<void> {
 

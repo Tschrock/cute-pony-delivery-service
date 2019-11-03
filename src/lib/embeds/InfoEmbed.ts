@@ -12,10 +12,10 @@ import { SERVICE_NAME } from '../constants';
 const DIVIDER = "\n\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_\\_";
 
 export class InfoEmbed extends RichEmbed {
-    constructor(clientId: string, commandHelpList: string[]) {
+    constructor(guildCount: number, inviteLink: string, commandHelpList: string[]) {
         super({
             title: `Welcome to the ${SERVICE_NAME}!`,
-            description: `I share cute ponies to keep you smiling thoughout the day.${DIVIDER}`,
+            description: `Sharing cute ponies to ${guildCount} servers.${DIVIDER}`,
             color: 13913602,
             footer: {
                 icon_url: "https://cdn.discordapp.com/attachments/393754919020134400/597310556751265802/Profile5_transparent.png",
@@ -27,7 +27,7 @@ export class InfoEmbed extends RichEmbed {
             fields: [
                 {
                     name: "Invite Link",
-                    value: `https://discordapp.com/oauth2/authorize?client_id=${clientId}&scope=bot&permissions=18432 ${DIVIDER}`
+                    value:  `${inviteLink} ${DIVIDER}`
                 },
                 {
                     name: "Commands",

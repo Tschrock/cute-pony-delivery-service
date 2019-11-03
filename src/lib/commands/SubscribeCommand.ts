@@ -13,6 +13,7 @@ import { Command } from "./Command";
 import { ChannelSubscription } from "../models/ChannelSubscription";
 import { ErrorEmbed } from '../embeds/ErrorEmbed';
 import { SERVICE_NAME } from '../constants';
+import { CommandPermission } from "../CommandPermission";
 
 export class SubscribeCommand extends Command {
 
@@ -21,6 +22,8 @@ export class SubscribeCommand extends Command {
 
     public readonly command = "subscribe";
     public readonly aliases = [];
+
+    public readonly permission = CommandPermission.USER;
 
     public async run(command: string, args: string[], message: Message): Promise<void> {
 

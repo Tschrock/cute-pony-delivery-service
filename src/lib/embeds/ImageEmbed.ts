@@ -8,7 +8,7 @@
 import { RichEmbed } from 'discord.js';
 import { Image } from 'node-derpi';
 
-import { formatDate } from '../util';
+import { formatDate, formatArray } from '../util';
 
 const DERPI_IMAGE_PAGE = "https://derpibooru.org/";
 
@@ -18,9 +18,26 @@ export class ImageEmbed extends RichEmbed {
 
         const pageUrl = `${DERPI_IMAGE_PAGE}${image.id}`;
 
+        const artists = image.tagNames.filter(t => t.startsWith("artist:")).map(t => t.replace("artist:", ""));
+
+        let artistsText: string | undefined;
+
+        if(artists.length === 0) {
+            artistsText = undefined;
+        }
+        if(artists.length === 1) {
+            artistsText = `Artist: ${artists[0]}`;
+        }
+        else if (artists.length <= 5) {
+            artistsText = `Artists: ${formatArray(artists)}`;
+        }
+        else {
+            artistsText = `Multiple Artists`;
+        }
+
         super({
             title: pageUrl,
-            //description: trimTags(image.tagNames, 5).join("\n"),
+            description: artistsText,
             url: pageUrl,
             color: 8231268,
             footer: {

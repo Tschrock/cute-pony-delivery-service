@@ -51,7 +51,7 @@ export class UnitFormatter {
         const formats: Format[] = [];
         let currentValue = value;
         while(currentValue > 0 && maxDepth --> 0) {
-            const format = this.getNextFormat(value);
+            const format = this.getNextFormat(currentValue);
             if(format === EmptyFormat) break;
             formats.push(format);
             currentValue = format.remainder;

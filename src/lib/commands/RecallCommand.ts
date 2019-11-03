@@ -12,6 +12,7 @@ import { ChannelSubscription } from "../models/ChannelSubscription";
 import { ErrorEmbed } from '../embeds/ErrorEmbed';
 import { SERVICE_NAME } from '../constants';
 import { sleep, searchMessage } from '../util';
+import { CommandPermission } from "../CommandPermission";
 
 export class RecallCommand extends Command {
 
@@ -21,7 +22,7 @@ export class RecallCommand extends Command {
     public readonly command = "recall";
     public readonly aliases = [];
 
-    public readonly showInHelp = false;
+    public readonly permission = CommandPermission.POSTER;
 
     public async run(command: string, args: string[], message: Message): Promise<void> {
 
