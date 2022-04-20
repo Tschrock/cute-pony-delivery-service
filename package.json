@@ -28,7 +28,7 @@
   "dependencies": {
     "@discordjs/uws": "^11.149.1",
     "@types/request-promise-native": "^1.0.17",
-    "convict": "^5.2.0",
+    "convict": "^6.2.2",
     "discord.js": "^11.5.1",
     "erlpack": "github:discordapp/erlpack",
     "node-derpi": "^0.3.7",
